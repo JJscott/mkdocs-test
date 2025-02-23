@@ -1,0 +1,24 @@
+
+
+
+Create and run Virtual Enviroment:
+
+# setup venv
+python -m venv .venv
+
+# activate vnenv
+.venv\Scripts\Activate
+
+# install dependencies
+pip install mkdocs-material
+
+# test
+mkdocs --version
+
+
+
+Setup vscode
+Ctrl + Shift + P (Command Palette)
+Python: Select Interpreter
+Choose `.venv\Scripts\python.exe``
+
