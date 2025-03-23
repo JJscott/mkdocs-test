@@ -32,7 +32,6 @@ plugins:
           name: 🇯🇵 Japanese
           build: true
   - json_export
-  # - !include docs_plugins.auto_numbering
 
 hooks:
   - hooks/markdown_reference_preprocess.py
