@@ -22,3 +22,19 @@ Ctrl + Shift + P (Command Palette)
 Python: Select Interpreter
 Choose `.venv\Scripts\python.exe``
 
+
+
+
+Things to solve still:
+
+- medium
+ + hosting online
+ + mike (versioning)
+
+- low
+ + skin to LSS style guide
+ + hover terms linked to glossary
+ + compare versions
+ + convert to pdf
+ + author comments
+ + convet {p} to the image/symbol/span
