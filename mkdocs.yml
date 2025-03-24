@@ -17,7 +17,7 @@ markdown_extensions:
       toc_depth: 2  # Only show H1 and H2
 
 extra_css:
-  - stylesheets/extra.css
+  - assets/stylesheets/extra.css
 
 plugins:
   - search
@@ -31,9 +31,15 @@ plugins:
         - locale: ja
           name: 🇯🇵 Japanese
           build: true
+  - mike
+
+extra: 
+  version:
+    provider: mike
 
 hooks:
   - hooks/markdown_reference_preprocess.py
+  - hooks/inject_icons.py
 
 nav:
   - Comprehensive Rules:

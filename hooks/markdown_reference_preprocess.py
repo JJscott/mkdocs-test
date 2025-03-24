@@ -50,36 +50,6 @@ def process_references(markdown, process_rule):
                 process_rule(text, hashes, rule_number, anchor)
             else:
                 process_rule(line)
-        
-
-
-# def on_pre_page(page, config, files):
-#     """
-#     Process each Markdown page before rendering.
-#     - Initialize global label mapping
-#     - Record labels and anchors
-#     """
-
-#     # Initialize global label mapping
-#     if "label_map" not in config.extra:
-#         config.extra["label_map"] = {}
-
-#     # Read the markdown content for the page
-#     if page.file.is_documentation_page():
-#         base_url = config.site_url.rstrip('/') if "site_url" in config else ""
-#         def record_label(text, hashes=None, rule_number=None, anchor=None):
-#             if hashes:
-#                 label_match = re.search(label_re, text)
-#                 if label_match:
-#                     label = label_match.group(1)
-#                     url = f"{base_url}/{page.url}"
-#                     config.extra["label_map"][label] = (rule_number, anchor, url)
-
-#         markdown = page.file.content_string
-#         process_references(markdown, record_label)
-
-#         print(f"on_pre_page: {page.file.src_path}")
-
 
 def on_files(files, config):
     """
@@ -130,13 +100,13 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         return f"<sup>[\[{label}\]]({label})</sup>"
 
 
-    processed_markdown = re.sub(ref_re, replace_reference, markdown)
+    markdown = re.sub(ref_re, replace_reference, markdown)
 
 
     # Check if we're processing labels
-    match = re.match(reference_flag_regex, processed_markdown)
+    match = re.match(reference_flag_regex, markdown)
     if not match:
-        return processed_markdown
+        return markdown
 
 
     # Insert rule numbers and anchors
@@ -152,10 +122,14 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
         else:
             processed.append(text)
 
-    process_references(processed_markdown, remove_label)
-    final_markdown = "\n".join(processed)
+    process_references(markdown, remove_label)
+    markdown = "\n".join(processed)
 
-    return final_markdown
+    # Finally, remove the reference flag
+    markdown = re.sub(reference_flag_regex, "", markdown)
+
+
+    return markdown
 
 
 

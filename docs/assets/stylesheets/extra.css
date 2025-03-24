@@ -47,3 +47,16 @@ h3 + blockquote {
 h4 + blockquote {
     margin-left: 4em !important;
 }
+
+.inline-icon {
+    display: inline-flex;
+    vertical-align: middle;
+    margin: 0 0.05em;
+}
+
+.inline-icon img {
+    height: 1.1em;
+    width: auto;
+    position: relative;
+    top: -0.1em;
+}
