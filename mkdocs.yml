@@ -31,7 +31,6 @@ plugins:
         - locale: ja
           name: 🇯🇵 Japanese
           build: true
-  - json_export
 
 hooks:
   - hooks/markdown_reference_preprocess.py
