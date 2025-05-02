@@ -1,0 +1,87 @@
+# This is a basic workflow to help you get started with Actions
+
+name: publish_minor_version
+
+on:
+  workflow_dispatch:
+
+# # Required for gh-pages deployment
+# permissions:
+#   contents: write
+
+
+jobs:
+  deploy:
+    name: Publish next minor version with mike
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out repo under $GITHUB_WORKSPACE
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # mike needs full history
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs mkdocs-material mike
+
+      - name: Get latest version tag
+        id: get_version
+        run: |
+          # Get the last published mike version
+          latest=$(mike list | tail -n1 | awk '{print $1}')
+          echo "Latest version: $latest"
+
+          if [[ $latest =~ ^([0-9]+)\.([0-9]+)$ ]]; then
+            major="${BASH_REMATCH[1]}"
+            minor="${BASH_REMATCH[2]}"
+            next_minor="$major.$((minor + 1))"
+          else
+            next_minor="1.0"
+          fi
+
+          echo "Next version: $next_minor"
+          echo "version=$next_minor" >> $GITHUB_OUTPUT
+
+      - name: Configure git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Deploy new version
+        run: |
+          mike deploy --push --update-aliases ${{ steps.get_version.outputs.version }} latest
+
+
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out repo under $GITHUB_WORKSPACE
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      # Setup python and dependencies
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Deploy using mk-docs
+      - run: mkdocs gh-deploy --force

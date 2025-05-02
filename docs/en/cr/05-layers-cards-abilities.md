@@ -56,7 +56,7 @@
 ### @@rule:play_illegal_play@@ **Check Legal Play**: Fourth, the card is evaluated if it is legal to play before any costs are paid. If a rule or effect prevents the card from being played, or the parameters of the proposed card are illegal, the card is illegal to play and the game state is reversed to before the card was announced.[[sec:reversing_game_state]]
 
 
-### @@rule:play_calculate_asset@@ **Calculate Asset-Costs}**: Fifth, all asset-costs of the proposed card are calculated.[[sec:assets]]
+### @@rule:play_calculate_asset@@ **Calculate Asset-Costs**: Fifth, all asset-costs of the proposed card are calculated.[[sec:assets]]
 
 #### First, rules define the starting asset-cost. Second, effects that set an asset-cost are applied. Third, effects that increase an asset-cost are applied. Fourth and finally, effects that reduce an asset-cost are applied - if an effect would reduce an asset-cost to be less than zero, it instead reduces it to zero. If two or more effects are applied at each step, then they are applied in timestamp order[[rule:effect_timestamp_order]].
 

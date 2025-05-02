@@ -7,6 +7,7 @@ label_re = r"@@((cha|sec|rule):\w+)@@" # e.g. @@rule:label@@
 ref_re = r"\[\[((cha|sec|rule):\w+)\]\]" # e.g. [[rule:label]]
 
 
+
 def process_references(markdown, process_rule):
     """
     Runs process_rule function once for each rule in the markdown.
@@ -43,13 +44,14 @@ def process_references(markdown, process_rule):
                 # Create anchor from rule number
                 anchor = f'{rulebook}{rule_number}'
 
-
                 # Call function to process the rule
                 # - Record label-anchor mappings OR
                 # - Remove labels from text and replace references with anchors
                 process_rule(text, hashes, rule_number, anchor)
             else:
                 process_rule(line)
+
+
 
 def on_files(files, config):
     """
@@ -82,8 +84,6 @@ def on_files(files, config):
 
 
 
-
-
 def on_page_markdown(markdown, page, config, files, **kwargs):
     """
     Process each Markdown page before rendering.
@@ -99,15 +99,12 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
             return f"<sup>[\[{rule_number}\]]({url}#{anchor})</sup>"
         return f"<sup>[\[{label}\]]({label})</sup>"
 
-
     markdown = re.sub(ref_re, replace_reference, markdown)
-
 
     # Check if we're processing labels
     match = re.match(reference_flag_regex, markdown)
     if not match:
         return markdown
-
 
     # Insert rule numbers and anchors
     processed = []
@@ -127,7 +124,6 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
 
     # Finally, remove the reference flag
     markdown = re.sub(reference_flag_regex, "", markdown)
-
 
     return markdown
 

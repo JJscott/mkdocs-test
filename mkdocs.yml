@@ -1,14 +1,31 @@
-site_name: Rules and Policy Documents
+site_name: Flesh and Blood | Rules and Policy Documents
 
 site_url: https://jjscott.nz/mkdocs-test
 
 theme:
   name: material
+  custom_dir: overrides
+  favicon: assets/images/favicon.ico
+  icon: material/menubook
   features:
     - search.suggest
     - search.highlight
     - navigation.tabs
+    - navigation.top
     - toc.integrate
+  palette:
+    # Dark Mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: lss-dark
+      toggle:
+        icon: material/brightness-4
+        name: Dark mode
+    # Light Mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: lss-light
+      toggle:
+        icon: material/brightness-7
+        name: Light mode
 
 markdown_extensions:
   - attr_list # custom anchors from markdown
@@ -31,7 +48,9 @@ plugins:
         - locale: ja
           name: 🇯🇵 Japanese
           build: true
-  - mike
+  - mike:
+      canonical_version: latest
+      version_selector: true
 
 extra: 
   version:
