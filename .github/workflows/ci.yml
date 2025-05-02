@@ -5,9 +5,11 @@ name: ci
 
 # Run workflow on push to master or manual
 on:
-  push:
-    branches: [ "master" ]
   workflow_dispatch: # Allows manual workflow from Actions tab
+    inputs:
+      docsVersion:
+        description: 'Write "I Know What Im Doing"'
+        required: true
 
 # Required for gh-pages deployment
 permissions:
