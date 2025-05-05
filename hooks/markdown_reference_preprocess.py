@@ -106,7 +106,7 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     if not match:
         return markdown
 
-    # Insert rule numbers and anchors
+    # Remove labels and put the text back together
     processed = []
     def remove_label(text, hashes=None, rule_number=None, anchor=None):
         if hashes:
