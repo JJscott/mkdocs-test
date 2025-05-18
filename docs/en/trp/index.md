@@ -1,1 +1,0 @@
-This is the english index for the Tournament Rules and Policy

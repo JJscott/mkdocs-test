@@ -1,6 +1,6 @@
 site_name: Flesh and Blood | Rules and Policy Documents
 
-site_url: https://jjscott.nz/mkdocs-test
+site_url: https://jjscott.nz/mkdocs-test/
 
 theme:
   name: material
@@ -48,16 +48,10 @@ plugins:
         - locale: ja
           name: 🇯🇵 Japanese
           build: true
-  - mike:
-      canonical_version: latest
-      version_selector: true
-
-extra: 
-  version:
-    provider: mike
 
 hooks:
   - hooks/markdown_reference_preprocess.py
+  - hooks/raw_txt_export.py
   - hooks/inject_icons.py
 
 nav:
@@ -75,7 +69,7 @@ nav:
     - Glossary: 'cr/glossary.md'
     - Acknowledgments: 'cr/acknowledgments.md'
 
-  - Tournament Rules and Policy:
-    - 1. Game Concepts: 'trp/01-tournament-information.md'
-    - 2. Roles and Responsibilities: 'trp/02-roles-and-responsibilities.md'
-    - 3. Tournament Logistics: 'trp/03-tournament-logistics.md'
+  # - Tournament Rules and Policy:
+  #   - 1. Game Concepts: 'trp/01-tournament-information.md'
+  #   - 2. Roles and Responsibilities: 'trp/02-roles-and-responsibilities.md'
+  #   - 3. Tournament Logistics: 'trp/03-tournament-logistics.md'

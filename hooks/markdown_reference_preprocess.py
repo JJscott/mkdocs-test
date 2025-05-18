@@ -68,14 +68,18 @@ def on_files(files, config):
 
     for file in files:
         if file.is_documentation_page():
+
+            lang_code = re.match(r"^([a-z]{2})/", file.src_uri).group(1) # en, ja, etc.
             markdown = file.content_string
 
             def record_label(text, hashes=None, rule_number=None, anchor=None):
                 if hashes:
                     label_match = re.search(label_re, text)
                     if label_match:
-                        label = label_match.group(1)
-                        url = f"{base_url}/{file.url}"
+                        label = f"{label_match.group(1)}:{lang_code}"
+                        file_url = file.url.replace('en/', '') if lang_code == 'en' else file.url
+                        url = f"{base_url}/{file_url}"
+                        # Add label+language mapping to the rule number, anchor, and url
                         config.extra["label_map"][label] = (rule_number, anchor, url)
 
             process_references(markdown, record_label)
@@ -91,13 +95,16 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     - Insert rule numbers and anchors
     """
 
+    lang_code = re.match(r"^([a-z]{2})/", page.file.src_uri).group(1) # en, ja, etc.
+
     # Replace references with hyperlinks
     def replace_reference(match):
         label = match.group(1)
-        if label in config.extra["label_map"]:
-            rule_number, anchor, url = config.extra["label_map"][label]
-            return f"<sup>[\[{rule_number}\]]({url}#{anchor})</sup>"
-        return f"<sup>[\[{label}\]]({label})</sup>"
+        mod_label = f"{label}:{lang_code}"
+        if mod_label in config.extra["label_map"]:
+            rule_number, anchor, url = config.extra["label_map"][mod_label]
+            return f"<sup>[[{rule_number}]]({url}#{anchor})</sup>"
+        return f"<sup>[[ERROR]]({mod_label})</sup>"
 
     markdown = re.sub(ref_re, replace_reference, markdown)
 

@@ -231,7 +231,6 @@ A macro is not a card.
 ### **Invocation** @@rule:invocation_subtype@@
 
 #### When an invocation resolves as a layer on the stack, it enters the arena with its back-face active and becomes a permanent.[[sec:double_faced_cards]]
-%
 
 
 ### **Construct** @@rule:construct_subtype@@
@@ -382,7 +381,6 @@ Quell is a static ability. Quell is written as "Quell N" which means "If you wou
 
 ### **Ward** @@rule:ward_ability@@
 Ward is a static ability. Ward is written as "Ward N" which means "If you would be dealt damage, destroy this to prevent N of that damage."
-%
 
 
 ### **Ephemeral** @@rule:ephemeral_ability@@
@@ -406,7 +404,7 @@ Piercing is a static ability. Piercing is written as "Piercing N" which means "I
 
 
 ### **Stealth** @@rule:stealth_ability@@
-{\color{white}Stealth is an ability that means nothing.}
+<span style='color: rgba(0, 0, 0, 0);'>Stealth is an ability that means nothing.</span>
 
 
 ### **Mirage** @@rule:mirage_ability@@
@@ -1063,7 +1061,6 @@ An Ash token is a token with the name "Ash," the supertypes draconic and illusio
 
 ### **Aether Ashwing** @@rule:aether_ashwing_token@@
 An Aether Ashwing token is a token with the name "Aether Ashwing," the supertypes draconic and illusionist, the subtypes dragon and ally, a power of 1\{p\}, a life of 1\{h\}, and the static ability "Arcane Barrier 1."
-%
 
 
 ### **Gold** @@rule:gold_token@@

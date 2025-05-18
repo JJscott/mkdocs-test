@@ -1,76 +1,54 @@
-# rules_data = {}
+rules_data = {}
+
+import os
+import re
+import markdown as md
+from bs4 import BeautifulSoup
+from collections import defaultdict
+
+# Dictionary to store plain text content by file path
+plain_text_by_doc = defaultdict(list)
 
 
-# import os
-# import re
-# import markdown
-# from bs4 import BeautifulSoup
+def on_page_markdown(markdown, page, config, files):
 
-# # Dictionary to store plain text content by file path
-# plain_text_by_path = {}
+    # Split path: e.g. en/cr/chapter-1.md -> [en, cr, chapter-1.md]
+    groups = re.match(r"^([a-z]{2})/([^/]+)/(.+)", page.file.src_uri)
+    if groups:
+        lang = groups.group(1)  # e.g. en, ja
+        doc = groups.group(2)  # e.g. cr, trp, etc.
+        file = groups.group(3)  # e.g. 01-grame-concept.md, etc.
 
-# def strip_markdown_to_text(markdown_content):
-#     # Convert markdown to HTML, then extract plain text using BeautifulSoup
-#     html = markdown.markdown(markdown_content, extensions=['extra'])
-#     soup = BeautifulSoup(html, 'html.parser')
-#     return soup.get_text()
+        # Only process files that start with a chapter number
+        match = re.match(r"^\d{2}-.*\.md$", file)
+        if match:
+            # Convert to plain text from the markdown
+            html = md.markdown(markdown, extensions=['extra'])
+            soup = BeautifulSoup(html, 'html.parser')
+            plain_text = soup.get_text()
 
-# def on_page_markdown(markdown, page, config, files):
-#     # Convert and store the plain text version for this page
-#     plain_text = strip_markdown_to_text(markdown)
-#     plain_text_by_path[page.file.src_path] = plain_text
-#     return markdown
+            # Store plain text by file parts (language, document)
+            doc_key = f"{lang}-{doc}"
+            plain_text_by_doc[doc_key].append((file, plain_text))
+    return markdown
 
-# def on_post_build(config):
-#     output_dir = os.path.join(config.site_dir, "plain_text")
-#     os.makedirs(output_dir, exist_ok=True)
 
-#     for src_path, text in plain_text_by_path.items():
-#         # Generate corresponding output path
-#         name = os.path.splitext(os.path.basename(src_path))[0]
-#         txt_path = os.path.join(output_dir, f"{name}.txt")
+def on_post_build(config):
+    plain_text_dir = os.path.join(config.site_dir, "plain_text")
+    os.makedirs(plain_text_dir, exist_ok=True)
 
-#         # Save plain text to .txt file
-#         with open(txt_path, "w", encoding="utf-8") as f:
-#             f.write(text)
+    # We assume that list is in alphbetical order
+    for doc_key, chapters in plain_text_by_doc.items():
+        lang, doc = doc_key.split('-')
 
-# def on_page_markdown(self, markdown, page, config, files):
-#     rules = []
-#     current_rule = None
+        # Sort chapters by filename
+        sorted_chapters = sorted(chapters, key=lambda x: x[0])
+        combined_text = re.sub(r'\n+', '\n', '\n'.join(text for _, text in sorted_chapters))
 
-#     for line in markdown.split("\n"):
-#         if line.startswith("#"):  # Header lines
-#             if current_rule:
-#                 rules.append(current_rule)
-#             current_rule = {"number": "", "title": line.strip("# ").strip(), "content": "", "id": page.url}
-#         elif current_rule:
-#             current_rule["content"] += line.strip() + " "
+        output_dir = os.path.join(plain_text_dir, lang, doc)
+        os.makedirs(output_dir, exist_ok=True)
+        output_path = os.path.join(output_dir, "raw.txt")
 
-#     if current_rule:
-#         rules.append(current_rule)
-
-#     self.rules_data[page.url] = rules
-#     return markdown  # Return unmodified Markdown
-
-# def on_page_markdown(self, markdown, page, config, files):
-#     rules = []
-#     current_rule = None
-
-#     for line in markdown.split("\n"):
-#         if line.startswith("#"):  # Header lines
-#             if current_rule:
-#                 rules.append(current_rule)
-#             current_rule = {"number": "", "title": line.strip("# ").strip(), "content": "", "id": page.url}
-#         elif current_rule:
-#             current_rule["content"] += line.strip() + " "
-
-#     if current_rule:
-#         rules.append(current_rule)
-
-#     self.rules_data[page.url] = rules
-#     return markdown  # Return unmodified Markdown
-
-# def on_post_build(self, config):
-#     output_path = os.path.join(config['site_dir'], "rules.json")
-#     with open(output_path, "w", encoding="utf-8") as f:
-#         json.dump(self.rules_data, f, indent=2)
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(combined_text)
+        print(f"Written plain text to {output_path}")

@@ -33,7 +33,7 @@
 > **Example:** A player may play Null||Shock by declaring one of its sides (Null or Shock), or by declaring both sides using meld. Doing so determines the name, types, and abilities of the card on the stack until it ceases to exist.
 
 
-### @@start_aa@@ @@rule:play_cost_parameters@@ **Declare Costs**: Second, the player declares the parameters for any costs of the proposed card.
+### @@rule:play_cost_parameters@@ **Declare Costs**: Second, the player declares the parameters for any costs of the proposed card.
 
 #### If the card has a variable cost that includes X, the player must declare the value of X[[rule:x_value]]. If the player uses an effect to play the card without paying the cost that includes X, then the player must declare X as 0.
 
@@ -80,7 +80,7 @@
 #### If a replacement effect modifies an effect-cost, and that cost cannot be paid (the effect does not resolve successfully), the card can still be played.
 
 
-### @@end_aa@@ @@rule:play_priority@@ **Play**: Ninth and finally, the card is now considered played and the player regains priority.
+### @@rule:play_priority@@ **Play**: Ninth and finally, the card is now considered played and the player regains priority.
 
 
 
@@ -104,7 +104,7 @@
 
 #### Announce the activated ability to be activated. The activated-layer is created in the stack zone under that player's control and becomes the topmost layer of the stack. The activated-layer is created with the same supertypes and types as the source of the activated ability. Continuous effects begin to apply to the ability layer.
 
-#### The remainder of the process for activating an activated ability is identical to the process for playing a card listed in steps [[start_aa]]-[[end_aa]], substituting "play" for 'activate`, and "card" for "ability."
+#### The remainder of the process for activating an activated ability is identical to the process for playing a card listed in steps [[rule:play_cost_parameters]]-[[rule:play_priority]], substituting "play" for 'activate`, and "card" for "ability."
 
 
 ### If an effect allows an ability to be activated additional times, that activated ability may be activated to exceed its LIMIT by the specified amount of times.
