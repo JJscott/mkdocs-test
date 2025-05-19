@@ -13,30 +13,29 @@ plain_text_by_doc = defaultdict(list)
 def on_page_markdown(markdown, page, config, files):
 
     # Split path: e.g. en/cr/chapter-1.md -> [en, cr, chapter-1.md]
-    groups = re.match(r"^([a-z]{2})/([^/]+)/(.+)", page.file.src_uri)
+    groups = re.match(r"^([a-z]+)/(.+)", page.file.src_uri)
     if groups:
-        lang = groups.group(1)  # e.g. en, ja
-        doc = groups.group(2)  # e.g. cr, trp, etc.
-        file = groups.group(3)  # e.g. 01-grame-concept.md, etc.
+        lang = config.get('theme', {}).get('language', 'en') # en, ja, etc.
+        doc = page.meta.get('document')  # e.g. cr, trp, etc.
+        cha = page.meta.get('chapter')  # e.g. 01-grame-concept.md, etc.
 
-        # Only process files that start with a chapter number
-        match = re.match(r"^\d{2}-.*\.md$", file)
-        if match:
-            # Convert to plain text from the markdown
+        # Only process files that are numbered
+        if doc and cha:
+            # Convert markdown -> html -> plain text
             html = md.markdown(markdown, extensions=['extra'])
             soup = BeautifulSoup(html, 'html.parser')
             plain_text = soup.get_text()
 
             # Store plain text by file parts (language, document)
             doc_key = f"{lang}-{doc}"
-            plain_text_by_doc[doc_key].append((file, plain_text))
+            plain_text_by_doc[doc_key].append((cha, plain_text))
     return markdown
 
 
 def on_post_build(config):
 
     # Ensure the plain text directory exists
-    plain_text_dir = os.path.join(config.site_dir, "txt")
+    plain_text_dir = os.path.join(config.site_dir, "..", "txt")
     os.makedirs(plain_text_dir, exist_ok=True)
 
     for doc_key, chapters in plain_text_by_doc.items():
@@ -49,7 +48,7 @@ def on_post_build(config):
         combined_text = re.sub(r'\n+', '\n', '\n'.join(text for _, text in sorted_chapters))
 
         # Overwritse latest file if it exists
-        # e.g. SITE/latest/en-fab-cr.txt
+        # e.g. txt/latest/en-fab-cr.txt
         latest_dir = os.path.join(plain_text_dir, 'latest')
         os.makedirs(latest_dir, exist_ok=True)
         latest_path = os.path.join(latest_dir, f'{lang}-fab-{doc}.txt')
@@ -57,7 +56,7 @@ def on_post_build(config):
             f.write(combined_text)
 
         # Create a unique file name with timestamp
-        # e.g. SITE/archive/en-fab-cr-2.10.1-20250505120000.txt
+        # e.g. txt/archive/en-fab-cr-2.10.1-20250505120000.txt
         unique_dir = os.path.join(plain_text_dir, "archive")
         os.makedirs(unique_dir, exist_ok=True)
         unique_path = os.path.join(unique_dir, f'{lang}-fab-{doc}-{version}-{now:%Y%m%d%H%M%S}.txt')

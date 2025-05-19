@@ -36,17 +36,36 @@ jobs:
         run: pip install -r requirements.txt
 
       # Build EN docs
-      - name: Deploy EN site to GitHub Pages
+      - name: Build EN site to '/site/en'
         run: mkdocs build -f config/en/mkdocs.yml -d ../../site/en
       
       # Build JA docs
-      - name: Deploy JA site to GitHub Pages
+      - name: Build JA site to '/site/ja'
         run: mkdocs build -f config/ja/mkdocs.yml  -d ../../site/ja
 
-      # Push built pages to gh-pages branch
-      - name: Deploy to GitHub Pages
+      # Push built EN pages to gh-pages branch
+      - name: Deploy EN to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+          publish_dir: ./site/en
+          destination_dir: en
           publish_branch: gh-pages
+
+      # Push built JA pages to gh-pages branch
+      - name: Deploy JA to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site/ja
+          destination_dir: ja
+          publish_branch: gh-pages
+
+      # Push built txt pages to gh-pages branch
+      - name: Deploy txt exports
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site/txt
+          destination_dir: txt
+          keep_files: true

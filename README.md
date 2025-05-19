@@ -15,13 +15,6 @@ Ctrl + Shift + P (Command Palette)
 Python: Select Interpreter
 Choose `.venv\Scripts\python.exe``
 
-# Current
-Working with languages
-https://github.com/squidfunk/mkdocs-material/discussions/2346
-https://github.com/squidfunk/mkdocs-material/blob/master/docs/setup/changing-the-language.md
-https://jimandreas.github.io/mkdocs-material/setup/changing-the-language/
-
-
 # TODO
 * Hover terms linked to glossary
 * Compare versions

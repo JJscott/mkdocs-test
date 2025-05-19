@@ -13,11 +13,12 @@ The aim of this platform is to provide a clear, accessible, and authoritative re
 Here, you'll find a comprehensive structured breakdown of the rules, alongside explanations, examples, and definitions to help you navigate even the trickiest interactions. While the language is precise, the goal is always to make the intent behind each rule as understandable as possible.
 
 
-## [Comprehensive Rules](../cr/index.md)
+
+## [Comprehensive Rules](cr/index.md)
 
 The Comprehensive Rules define the detailed rules framework for how the game of Flesh and Blood operates. It outline the precise behavior of cards, mechanics, and player actions. While not intended as a regular reading material for most players or judges, the Comprehensive Rules are used primarily when investigating complex card interactions or resolving edge cases not specifically covered in other materials. It serve as a technical reference to support consistent and accurate rulings when clarity is needed beyond what standard rule summaries provide.
 
-A text-only version of the Comprehensive Rules can be found here. [`🗎 en-fab-cr.txt`]({{ config.site_url }}txt/latest/en-fab-cr.txt)
+A text-only version of the Comprehensive Rules can be found here. [`🗎 en-fab-cr.txt`]({{ config.site_url }}../txt/latest/en-fab-cr.txt)
 
 
 
