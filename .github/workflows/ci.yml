@@ -35,8 +35,18 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Deploy using mk-docs
+      # Build EN docs
       - name: Deploy EN site to GitHub Pages
-        run: mkdocs gh-deploy -f config/en/mkdocs.yml -d ./en/ --force
+        run: mkdocs build -f config/en/mkdocs.yml -d ../../site/en
+      
+      # Build JA docs
       - name: Deploy JA site to GitHub Pages
-        run: mkdocs gh-deploy -f config/ja/mkdocs.yml -d ./ja/ --force
+        run: mkdocs build -f config/ja/mkdocs.yml  -d ../../site/en
+
+      # Push built pages to gh-pages branch
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
