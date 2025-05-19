@@ -1,3 +1,8 @@
+---
+title: FAB Comprehensive Rules – Preface
+description: "The comprehensive rules for Flesh and Blood."
+---
+
 # Preface
 
 Flesh and Blood is a competitive Trading Card Game where two heroes face off in a fight to the death. Each player starts the game with their hero, weapon, and equipment set in play. The battle is fought through the strategic use of resources, knowing when to defend, and when to go in for the kill. 

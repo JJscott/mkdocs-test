@@ -1,3 +1,8 @@
+---
+title: FAB Comprehensive Rules – Acknowledgments
+description: "Acknowledgments of those that have contributed to the creation and update of the comprehensive rules."
+---
+
 # Acknowledgments
 
 ## Legend Story Studios

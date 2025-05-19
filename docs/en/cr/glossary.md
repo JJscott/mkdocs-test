@@ -1,3 +1,8 @@
+---
+title: FAB Comprehensive Rules – Glossary
+description: "Glossary of terms and phrases in the comprehensive rules."
+---
+
 # Glossary
 
 ### **(1H)**

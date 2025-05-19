@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Game Concepts
+title: FAB Comprehensive Rules – Game Concepts
 description: The fundemental concepts of Flesh and Blood.
 document: cr
 chapter: 1

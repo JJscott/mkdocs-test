@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Combat
+title: FAB Comprehensive Rules – Combat
 description: The elements and stages of combat.
 document: cr
 chapter: 7

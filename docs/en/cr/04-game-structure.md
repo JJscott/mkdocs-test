@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Game Structure
+title: FAB Comprehensive Rules – Game Structure
 description: The process of starting, playing, and ending a game.
 document: cr
 chapter: 4

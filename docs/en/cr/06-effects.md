@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Effects
+title: FAB Comprehensive Rules – Effects
 description: Generating discrete, continuous, replacement, and triggered effects.
 document: cr
 chapter: 6

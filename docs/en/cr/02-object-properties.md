@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Object Properties
+title: FAB Comprehensive Rules – Object Properties
 description: A complete overview of the properties that make up an object.
 document: cr
 chapter: 2

@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Layers, Cards, & Abilities
+title: FAB Comprehensive Rules – Layers, Cards, & Abilities
 description: Playing cards, activating abilities, resolving layers, and more.
 document: cr
 chapter: 5

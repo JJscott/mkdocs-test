@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Zones
+title: FAB Comprehensive Rules – Zones
 description: The states and locations of objects, and an overview of zones.
 document: cr
 chapter: 3

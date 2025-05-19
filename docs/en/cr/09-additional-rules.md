@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Additional Rules
+title: FAB Comprehensive Rules – Additional Rules
 description: "Additional rules that cover unique mechanics outside of the general rules."
 document: cr
 chapter: 9

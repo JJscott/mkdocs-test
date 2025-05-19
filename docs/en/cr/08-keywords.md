@@ -1,5 +1,5 @@
 ---
-title: Comprehesive Rules – Keywords
+title: FAB Comprehensive Rules – Keywords
 description: "A descriptions of all keywords: type, subtype, ability, label, effect, and token."
 document: cr
 chapter: 8
