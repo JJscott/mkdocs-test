@@ -49,6 +49,7 @@ extra_css:
 
 plugins:
   - search
+  - macros
   - i18n:
       docs_structure: folder
       languages:
@@ -66,8 +67,9 @@ hooks:
   - hooks/inject_icons.py
 
 nav:
+  - Home: index.md
   - Comprehensive Rules:
-    - Preface: 'cr/preface.md'
+    - Preface: 'cr/index.md'
     - 1. Game Concepts: 'cr/01-game-concepts.md'
     - 2. Object Properties: 'cr/02-object-properties.md'
     - 3. Zones: 'cr/03-zones.md'
@@ -79,8 +81,3 @@ nav:
     - 9. Additional Rules: 'cr/09-additional-rules.md'
     - Glossary: 'cr/glossary.md'
     - Acknowledgments: 'cr/acknowledgments.md'
-
-  # - Tournament Rules and Policy:
-  #   - 1. Game Concepts: 'trp/01-tournament-information.md'
-  #   - 2. Roles and Responsibilities: 'trp/02-roles-and-responsibilities.md'
-  #   - 3. Tournament Logistics: 'trp/03-tournament-logistics.md'

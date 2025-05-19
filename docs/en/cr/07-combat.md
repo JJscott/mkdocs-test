@@ -241,7 +241,7 @@ chapter: 7
 ### The Resolution Step is a game state where the active chain link resolves and the attacker may gain an action point from go again and continue the combat chain by attacking.
 
 
-### @@rule:chain_link_resolution@@ @@rule:combat_go_again@@ First, the active chain link becomes a resolved chain link and effects that trigger when the chain link resolves are triggered. If the attack has go again, its controller gains 1 action point.
+### @@rule:chain_link_resolution@@ First, the active chain link becomes a resolved chain link and effects that trigger when the chain link resolves are triggered. If the attack has go again, its controller gains 1 action point.
 
 #### If the attack is no longer on the combat chain, the last known information of the attack is used to determine whether the attack has go again.
 

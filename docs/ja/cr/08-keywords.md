@@ -290,7 +290,7 @@ Go again is a special resolution ability that means "Gain 1 action point."
 
 #### If go again is an ability of a non-attack layer on the stack, the controlling player gains 1 action point after all other resolution abilities have resolved.[[rule:resolve_go_again]]
 
-#### If go again is an ability of an attack on the active chain link, the controlling player gains 1 action point at the beginning of the Resolution Step of combat.[[rule:combat_go_again]]
+#### If go again is an ability of an attack on the active chain link, the controlling player gains 1 action point at the beginning of the Resolution Step of combat.[[rule:chain_link_resolution]]
 
 #### An object cannot have more than one "go again" ability. If an effect would give the "go again" ability to an object that already has the "go again" ability, then that part of the effect fails.
 
@@ -685,8 +685,8 @@ Look is a discrete effect or continuous effect. To look at a private object, the
 #### If look is a continuous effect and the object is specified by a location, the object the player may look at are determined as a game state action. If the object a player may look at changes due to a rule or effect, the player may not look at that new object until any player would gain priority.
 
 
-### **Lose (asset)**
-Lose is a discrete effect. To lose an asset, the player's or object's assets of the given type is decreased by the specified amo nt.[[sec:assets]] @@rule:lose_asset_effect@@
+### **Lose (asset)** @@rule:lose_asset_effect@@
+Lose is a discrete effect. To lose an asset, the player's or object's assets of the given type is decreased by the specified amount.[[sec:assets]] 
 
 #### If a living object lose \{h\}, its life total is decreased by the specified amount. If the object does not have the life property, then the lose effect fails.
 
