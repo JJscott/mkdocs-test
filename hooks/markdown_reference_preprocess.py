@@ -78,7 +78,7 @@ def on_files(files, config):
         if file.is_documentation_page():
 
             # Extract language, content, and meta data
-            lang_code = re.match(language_re, file.src_uri).group(1) # en, ja, etc.
+            lang_code = config.get('theme', {}).get('language', 'en') # en, ja, etc.
             markdown_content = file.content_string
             md_parser = md.Markdown(extensions=['meta'])
             md_parser.convert(markdown_content)
@@ -93,8 +93,7 @@ def on_files(files, config):
                     label_match = re.search(label_re, text)
                     if label_match:
                         label = f"{label_match.group(1)}:{lang_code}"
-                        file_url = file.url.replace('en/', '') if lang_code == 'en' else file.url
-                        url = f"{base_url}/{file_url}"
+                        url = f"{base_url}/{file.url}"
                         # Add label+language mapping to the rule number, anchor, and url
                         config.extra["label_map"][label] = (rule_number, anchor, url)
 
@@ -112,7 +111,7 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     """
 
     # Extract language
-    lang_code = re.match(language_re, page.file.src_uri).group(1) # en, ja, etc.
+    lang_code = config.get('theme', {}).get('language', 'en') # en, ja, etc.
 
     # Replace references with hyperlinks
     def replace_reference(match):

@@ -1,12 +1,36 @@
 {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "configurations": [
         {
-            "name": "Run MkDocs Server",
-            "type": "python",
+            "name": "Local Serve (EN)",
+            "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/.venv/Scripts/mkdocs.exe",
-            "args": ["serve"],
+            "args": ["serve", "-f", "config/en/mkdocs.yml"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Local Serve (JA)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/.venv/Scripts/mkdocs.exe",
+            "args": ["serve", "-f", "config/ja/mkdocs.yml"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Build (EN)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/.venv/Scripts/mkdocs.exe",
+            "args": ["build", "-f", "config/en/mkdocs.yml"],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Build (JA)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/.venv/Scripts/mkdocs.exe",
+            "args": ["build", "-f", "config/ja/mkdocs.yml"],
             "console": "integratedTerminal"
         }
     ]

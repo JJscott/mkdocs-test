@@ -36,4 +36,7 @@ jobs:
         run: pip install -r requirements.txt
 
       # Deploy using mk-docs
-      - run: mkdocs gh-deploy --force
+      - name: Deploy EN site to GitHub Pages
+        run: mkdocs -f config/en/mkdocs.yml gh-deploy --force
+      - name: Deploy JA site to GitHub Pages
+        run: mkdocs -f config/ja/mkdocs.yml gh-deploy --force

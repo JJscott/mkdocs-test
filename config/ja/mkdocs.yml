@@ -1,0 +1,92 @@
+site_url: https://jjscott.nz/ja/
+
+# JAPANESE LANGUAGE CONFIGURATION
+# -------------------------------
+
+site_dir: ../../site/ja/
+docs_dir: ../../docs/ja/
+
+site_name: フレッシュ・アンド・ブラッド | ルールとポリシー
+site_description: The official rules and policy documents for the Flesh and Blood TCG.
+site_author: Legedary Story Studios
+copyright: © 2019 Legend Story Studios. All Rights Reserved.
+
+nav:
+  - 家: index.md
+  - 包括的なルール:
+    - 序文: 'cr/index.md'
+    - 1. ゲームのコンセプト: 'cr/01-game-concepts.md'
+    - 2. オブジェクトのプロパティ: 'cr/02-object-properties.md'
+    - 3. ゾーン: 'cr/03-zones.md'
+    - 4. ゲーム構造: 'cr/04-game-structure.md'
+    - 5. レイヤー、カード、能力: 'cr/05-layers-cards-abilities.md'
+    - 6. 効果: 'cr/06-effects.md'
+    - 7. 戦闘: 'cr/07-combat.md'
+    - 8. キーワード: 'cr/08-keywords.md'
+    - 9. 追加ルール: 'cr/09-additional-rules.md'
+    - 用語集: 'cr/glossary.md'
+    - 謝辞: 'cr/acknowledgments.md'
+
+# -----------------------------------
+# END JAPANESE LANGUAGE CONFIGURATION
+
+
+# Set the version of each document
+extra:
+  cr:
+    version: 2.10.1
+  alternate:  
+      # Switch to English
+    - name: 🇬🇧 English
+      link: /en/
+      lang: en
+    # Switch to Language
+    - name: 🇯🇵 Japanese
+      link: /ja/
+      lang: ja
+  
+theme:
+  language: ja # JAPANESE LANGUAGE CONFIGURATION
+  name: material
+  custom_dir: ../../overrides
+  favicon: assets/images/favicon.ico
+  icon: material/menubook
+  features:
+    - search.suggest
+    - search.highlight
+    - navigation.tabs
+    - navigation.top
+    - toc.integrate
+  palette:
+    # Dark Mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: lss-dark
+      toggle:
+        icon: material/brightness-4
+        name: Dark mode
+    # Light Mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: lss-light
+      toggle:
+        icon: material/brightness-7
+        name: Light mode
+
+markdown_extensions:
+  - attr_list # custom anchors from markdown
+  - meta # meta data for the page
+  - toc:
+      permalink: '§'
+      toc_depth: 2  # Only show H1 and H2
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+plugins:
+  - search:
+      lang: ja # JAPANESE LANGUAGE CONFIGURATION
+  - macros
+
+hooks:
+  - ../../hooks/markdown_reference_preprocess.py
+  - ../../hooks/raw_txt_export.py
+  - ../../hooks/inject_icons.py
