@@ -41,7 +41,7 @@ jobs:
       
       # Build JA docs
       - name: Deploy JA site to GitHub Pages
-        run: mkdocs build -f config/ja/mkdocs.yml  -d ../../site/en
+        run: mkdocs build -f config/ja/mkdocs.yml  -d ../../site/ja
 
       # Push built pages to gh-pages branch
       - name: Deploy to GitHub Pages
