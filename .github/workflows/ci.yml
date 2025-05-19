@@ -37,6 +37,6 @@ jobs:
 
       # Deploy using mk-docs
       - name: Deploy EN site to GitHub Pages
-        run: mkdocs gh-deploy -f config/en/mkdocs.yml -d /en/ --force
+        run: mkdocs gh-deploy -f config/en/mkdocs.yml -d ./en/ --force
       - name: Deploy JA site to GitHub Pages
-        run: mkdocs gh-deploy -f config/ja/mkdocs.yml -d ja/ --force
+        run: mkdocs gh-deploy -f config/ja/mkdocs.yml -d ./ja/ --force
