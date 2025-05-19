@@ -1,4 +1,9 @@
-[REF book=CR chap=9]
+---
+title: Comprehesive Rules – Additional Rules
+description: "Additional rules that cover unique mechanics outside of the general rules."
+document: cr
+chapter: 9
+---
 
 # Additional Rules @@cha:additional_rules@@
 

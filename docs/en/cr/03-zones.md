@@ -1,4 +1,9 @@
-[REF book=CR chap=3]
+---
+title: Comprehesive Rules – Zones
+description: The states and locations of objects, and an overview of zones.
+document: cr
+chapter: 3
+---
 
 # Zones @@cha:zones@@
 

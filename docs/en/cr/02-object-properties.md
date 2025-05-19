@@ -1,4 +1,9 @@
-[REF book=CR chap=2]
+---
+title: Comprehesive Rules – Object Properties
+description: A complete overview of the properties that make up an object.
+document: cr
+chapter: 2
+---
 
 # Object Properties @@cha:object_properties@@
 

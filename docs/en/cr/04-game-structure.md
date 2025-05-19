@@ -1,4 +1,9 @@
-[REF book=CR chap=4]
+---
+title: Comprehesive Rules – Game Structure
+description: The process of starting, playing, and ending a game.
+document: cr
+chapter: 4
+---
 
 # Game Structure @@cha:game_structure@@
 

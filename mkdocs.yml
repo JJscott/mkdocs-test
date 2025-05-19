@@ -1,6 +1,9 @@
-site_name: Flesh and Blood | Rules and Policy Documents
-
+site_name: Flesh and Blood | Rules and Policy
 site_url: https://jjscott.nz/mkdocs-test/
+
+site_description: The official rules and policy documents for the Flesh and Blood TCG.
+site_author: Legedary Story Studios
+copyright: ©2025 Legend Story Studios. All rights reserved.
 
 theme:
   name: material
@@ -29,6 +32,7 @@ theme:
 
 markdown_extensions:
   - attr_list # custom anchors from markdown
+  - meta # meta data for the page
   - toc:
       permalink: '§'
       toc_depth: 2  # Only show H1 and H2

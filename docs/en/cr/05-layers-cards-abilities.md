@@ -1,4 +1,9 @@
-[REF book=CR chap=5]
+---
+title: Comprehesive Rules – Layers, Cards, & Abilities
+description: Playing cards, activating abilities, resolving layers, and more.
+document: cr
+chapter: 5
+---
 
 # Layers, Cards, & Abilities @@cha:layers_cards_abilities@@
 

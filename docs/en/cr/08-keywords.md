@@ -1,4 +1,9 @@
-[REF book=CR chap=8]
+---
+title: Comprehesive Rules – Keywords
+description: "A descriptions of all keywords: type, subtype, ability, label, effect, and token."
+document: cr
+chapter: 8
+---
 
 # Keywords @@cha:keywords@@
 

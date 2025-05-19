@@ -1,4 +1,9 @@
-[REF book=CR chap=1]
+---
+title: Comprehesive Rules – Game Concepts
+description: The fundemental concepts of Flesh and Blood.
+document: cr
+chapter: 1
+---
 
 # Game Concepts @@cha:game_concepts@@
 

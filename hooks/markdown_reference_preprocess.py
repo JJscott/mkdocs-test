@@ -1,20 +1,28 @@
 import re
+import markdown as md
 
 # label_map = {}  # Stores { "label": "1.2.3." } mappings
 
-reference_flag_regex = r"\[REF book=([A-Z]+) chap=(\d+)\]"
+# reference_flag_regex = r"\[REF book=([A-Z]+) chap=(\d+)\]"
+language_re = r"^([a-z]{2})/" # e.g. en/cr/01_game_rules.md
 label_re = r"@@((cha|sec|rule):\w+)@@" # e.g. @@rule:label@@
 ref_re = r"\[\[((cha|sec|rule):\w+)\]\]" # e.g. [[rule:label]]
 
 
 
-def process_references(markdown, process_rule):
+def process_references(markdown, meta, process_rule):
     """
     Runs process_rule function once for each rule in the markdown.
     """
-    match = re.match(reference_flag_regex, markdown)
-    if match:
-        rulebook, chapter = match.groups()
+    # Get document and chapter from the metadata
+    document = meta.get('document')
+    chapter_raw = meta.get('chapter')
+    try:
+        chapter = int(chapter_raw)
+    except (ValueError, TypeError):
+        chapter = None
+
+    if document and chapter:
 
         # Track numbering. Sections always start with 0 (e.g. 1.0 General)
         # Numbering starts with -1 to account for the first increment
@@ -42,7 +50,7 @@ def process_references(markdown, process_rule):
                     rule_number = ".".join(map(str, numbering[:3])) + letter_suffix
 
                 # Create anchor from rule number
-                anchor = f'{rulebook}{rule_number}'
+                anchor = f'{document}{rule_number}'
 
                 # Call function to process the rule
                 # - Record label-anchor mappings OR
@@ -55,9 +63,9 @@ def process_references(markdown, process_rule):
 
 def on_files(files, config):
     """
-    Process each Markdown page before rendering.
+    Process each Markdown page before rendering. Make no changes to the files.
     - Initialize global label mapping
-    - Record labels and anchors
+    - Record labels and anchors for each rule
     """
 
     # Initialize global label mapping
@@ -69,8 +77,16 @@ def on_files(files, config):
     for file in files:
         if file.is_documentation_page():
 
-            lang_code = re.match(r"^([a-z]{2})/", file.src_uri).group(1) # en, ja, etc.
-            markdown = file.content_string
+            # Extract language, content, and meta data
+            lang_code = re.match(language_re, file.src_uri).group(1) # en, ja, etc.
+            markdown_content = file.content_string
+            md_parser = md.Markdown(extensions=['meta'])
+            md_parser.convert(markdown_content)
+            md_meta = md_parser.Meta
+            md_meta = { # Flatten data if it's a list with one item
+                key: value[0] if isinstance(value, list) and len(value) == 1 else value
+                for key, value in md_meta.items()
+            }
 
             def record_label(text, hashes=None, rule_number=None, anchor=None):
                 if hashes:
@@ -82,7 +98,7 @@ def on_files(files, config):
                         # Add label+language mapping to the rule number, anchor, and url
                         config.extra["label_map"][label] = (rule_number, anchor, url)
 
-            process_references(markdown, record_label)
+            process_references(markdown_content, md_meta, record_label)
 
     return files
 
@@ -95,7 +111,8 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
     - Insert rule numbers and anchors
     """
 
-    lang_code = re.match(r"^([a-z]{2})/", page.file.src_uri).group(1) # en, ja, etc.
+    # Extract language
+    lang_code = re.match(language_re, page.file.src_uri).group(1) # en, ja, etc.
 
     # Replace references with hyperlinks
     def replace_reference(match):
@@ -105,32 +122,24 @@ def on_page_markdown(markdown, page, config, files, **kwargs):
             rule_number, anchor, url = config.extra["label_map"][mod_label]
             return f"<sup>[[{rule_number}]]({url}#{anchor})</sup>"
         return f"<sup>[[ERROR]]({mod_label})</sup>"
-
     markdown = re.sub(ref_re, replace_reference, markdown)
 
-    # Check if we're processing labels
-    match = re.match(reference_flag_regex, markdown)
-    if not match:
-        return markdown
+    # Remove labels, reconstruct line with rule numbers, and add anchors
+    if page.meta.get('document') and page.meta.get('chapter'):
+        processed = []
 
-    # Remove labels and put the text back together
-    processed = []
-    def remove_label(text, hashes=None, rule_number=None, anchor=None):
-        if hashes:
-            label_match = re.search(label_re, text)
-            if label_match:
-                text = text.replace(label_match.group(0), "").strip()
-            numbered_heading = f"{hashes} {rule_number} {text} {{ #{anchor} }}"
-            processed.append(numbered_heading)
-            
-        else:
-            processed.append(text)
+        def remove_label(text, hashes=None, rule_number=None, anchor=None):
+            if hashes:
+                label_match = re.search(label_re, text)
+                if label_match:
+                    text = text.replace(label_match.group(0), "").strip()
+                numbered_heading = f"{hashes} {rule_number} {text} {{ #{anchor} }}"
+                processed.append(numbered_heading)  
+            else:
+                processed.append(text)
 
-    process_references(markdown, remove_label)
-    markdown = "\n".join(processed)
-
-    # Finally, remove the reference flag
-    markdown = re.sub(reference_flag_regex, "", markdown)
+        process_references(markdown, page.meta, remove_label)
+        markdown = "\n".join(processed)
 
     return markdown
 

@@ -1,4 +1,9 @@
-[REF book=CR chap=7]
+---
+title: Comprehesive Rules – Combat
+description: The elements and stages of combat.
+document: cr
+chapter: 7
+---
 
 # Combat @@cha:combat@@
 
